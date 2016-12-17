@@ -24,7 +24,7 @@ public:
     DataList(int total);
     bool DataDisplay();
     bool BoolResorting();
-    
+    bool InsertResorting();
 };
     
 DataList::DataList(int total){
@@ -37,9 +37,6 @@ bool DataList::DataDisplay(){
     
     for(int ix=0;ix<arr.size();++ix)
         cout<<arr[ix]<<endl;
-    
-
-    
     return true;
 }
 
@@ -55,13 +52,40 @@ bool DataList::BoolResorting(){
                 arr[bx]=arr[bx-1];
                 arr[bx-1]=temp;
             }
-                
+    for(int ix=0;ix<arr.size();++ix)
+        cout<<arr[ix]<<endl;
+    return true;
+}
+
+bool DataList::InsertResorting(){
+    
+    int temp;
+    cout<<"使用插入排序的结果执行如下："<<endl;
+    
+    
+    for(int ix=1;ix<int(arr.size());ix++)
+        if(arr[ix-1]>arr[ix]){
+            temp=arr[ix];
+            int bx=ix-1;
+            while(bx>=0 && arr[bx]>temp){
+            
+                arr[bx+1]=arr[bx];
+                bx--;
+            }
+            arr[bx+1]=temp;
+        }
+    
+    
+    
     for(int ix=0;ix<arr.size();++ix)
         cout<<arr[ix]<<endl;
     
-    return true;
     
+    
+    return true;
 }
+
+
 
 
 int main(int argc, const char * argv[]) {
@@ -73,6 +97,22 @@ int main(int argc, const char * argv[]) {
     
     DataList _datalist(total);
     _datalist.DataDisplay();
-    _datalist.BoolResorting();
+    
+    cout<<"请选择使用何种排序方法"<<endl;
+    cout<<"1. 冒泡 2. 插入"<<endl;
+    
+    int choose;
+    
+    cin>>choose;
+    
+    switch(choose){
+        case 1: _datalist.BoolResorting();break;
+        case 2: _datalist.InsertResorting();break;
+            
+        default: exit(0);
+    }
+    
+    
+    
     return 0;
 }
